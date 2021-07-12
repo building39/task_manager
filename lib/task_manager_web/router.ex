@@ -17,6 +17,7 @@ defmodule TaskManagerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/items", ItemController # this is the new line
   end
 
   # Other scopes may use custom stacks.
