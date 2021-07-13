@@ -36,32 +36,34 @@
       <% end %>
     </ul>
   </section>
-  <footer class="footer" style="display: block;">
-    <span class="todo-count">
-      <%= remaining_items(@items) %> <%= pluralise(@items) %> left
-    </span>
-    <ul class="filters">
-      <li>
-        <a href="/items" class='<%= selected(@filter, "all") %>'>
-          All
-        </a>
-      </li>
-      <li>
-        <a href="/active" class='<%= selected(@filter, "active") %>'>
-          Active
-          [<%= Enum.count(filter(@items, "active")) %>]
-        </a>
-      </li>
-      <li>
-        <a href="/completed" class='<%= selected(@filter, "completed") %>'>
-          Completed
-          [<%= Enum.count(filter(@items, "completed")) %>]
-        </a>
-      </li>
-    </ul>
-    <a class="clear-completed" href="/clear">
-      Clear completed
-      [<%= Enum.count(filter(@items, "completed")) %>]
-    </a>
-  </footer>
+  <%= if got_items?(@items) do %>
+    <footer class="footer" style="display: block;">
+      <span class="todo-count">
+        <%= remaining_items(@items) %> <%= pluralise(@items) %> left
+      </span>
+      <ul class="filters">
+        <li>
+          <a href="/items" class='<%= selected(@filter, "all") %>'>
+            All
+          </a>
+        </li>
+        <li>
+          <a href="/active" class='<%= selected(@filter, "active") %>'>
+            Active
+            [<%= Enum.count(filter(@items, "active")) %>]
+          </a>
+        </li>
+        <li>
+          <a href="/completed" class='<%= selected(@filter, "completed") %>'>
+            Completed
+            [<%= Enum.count(filter(@items, "completed")) %>]
+          </a>
+        </li>
+      </ul>
+      <a class="clear-completed" href="/clear">
+        Clear completed
+        [<%= Enum.count(filter(@items, "completed")) %>]
+      </a>
+    </footer>
+  <% end %>
 </section>
