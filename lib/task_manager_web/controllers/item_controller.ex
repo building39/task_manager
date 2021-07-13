@@ -51,7 +51,7 @@ defmodule TaskManagerWeb.ItemController do
       {:ok, item} ->
         conn
         |> put_flash(:info, "Item updated successfully.")
-        |> redirect(to: Routes.item_path(conn, :show, item))
+        |> redirect(to: Routes.item_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", item: item, changeset: changeset)
