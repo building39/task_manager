@@ -41,7 +41,8 @@
       <%= for item <- @items do %>
         <li data-id="<%= item.id %>" class="<%= complete(item) %>">
           <div class="view">
-            <input <%= checked(item) %> class="toggle" type="checkbox">
+            <a href="<%= Routes.item_path(@conn, :toggle, item.id) %>"
+              class="toggle <%= checked(item) %>"></a>
             <label><%= item.text %></label>
             <%= link "", class: "destroy",
               to: Routes.item_path(@conn, :delete, item), method: :delete,
@@ -52,7 +53,7 @@
     </ul>
   </section>
   <footer class="footer" style="display: block;">
-    <span class="todo-count"><strong>1</strong> item left</span>
+    <span class="todo-count"><%= remaining_items(@items) %> items left</span>
     <ul class="filters">
       <li>
         <a href="#/" class="selected">All</a>

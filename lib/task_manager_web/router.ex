@@ -18,6 +18,7 @@ defmodule TaskManagerWeb.Router do
 
     get "/", PageController, :index
     resources "/items", ItemController # this is the new line
+    get "/items/toggle/:id", ItemController, :toggle
   end
 
   # Other scopes may use custom stacks.
