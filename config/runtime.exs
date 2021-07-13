@@ -76,14 +76,16 @@ config :task_manager, TaskManagerWeb.Endpoint,
   server: true,
   watchers: []
 
-# Configure your database
-config :task_manager, TaskManager.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: postgres_username,
-  password: postgres_password,
-  database: postgres_database,
-  hostname: postgres_host,
-  port: postgres_port,
-  migration_timestamps: [type: :utc_datetime],
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+if config_env() != :test do
+  # Configure your database
+  config :task_manager, TaskManager.Repo,
+    adapter: Ecto.Adapters.Postgres,
+    username: postgres_username,
+    password: postgres_password,
+    database: postgres_database,
+    hostname: postgres_host,
+    port: postgres_port,
+    migration_timestamps: [type: :utc_datetime],
+    show_sensitive_data_on_connection_error: true,
+    pool_size: 10
+end
