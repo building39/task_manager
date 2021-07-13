@@ -25,11 +25,11 @@ defmodule TaskManagerWeb.ItemView do
   def filter(items, str) do
     case str do
       "all" ->
-        items
+        Enum.filter(items, fn i -> i.status == 0 || i.status == 1 end)
       "active" ->
         Enum.filter(items, fn i -> i.status == 0 end)
       "completed" ->
-        Enum.filter(items, fn i -> i.status != 0 end)
+        Enum.filter(items, fn i -> i.status == 1 end)
     end
   end
 

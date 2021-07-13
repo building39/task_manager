@@ -1,8 +1,18 @@
 defmodule TaskManagerWeb.ItemController do
   use TaskManagerWeb, :controller
 
+  import Ecto.Query
+
+  alias TaskManager.Repo
   alias TaskManager.Todo
   alias TaskManager.Todo.Item
+
+  def clear_completed(conn, _param) do
+    person_id = 0
+    query = from(i in Item, where: i.person_id == ^person_id, where: i.status == 1)
+    Repo.update_all(query, set: [status: 2])
+    index(conn, %{filter: "all"})
+  end
 
   def index(conn, params) do
     item =
@@ -81,7 +91,7 @@ defmodule TaskManagerWeb.ItemController do
   def toggle_status(item) do
     case item.status do
       0 -> 1
-      _ -> 0
+      1 -> 0
     end
   end
 end

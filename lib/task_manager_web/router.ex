@@ -17,8 +17,10 @@ defmodule TaskManagerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/items", ItemController # this is the new line
+    resources "/items", ItemController
     get "/items/toggle/:id", ItemController, :toggle
+    get "/clear", ItemController, :clear_completed
+    # this route will "catch all" so has to be last:
     get "/:filter", ItemController, :index
   end
 
