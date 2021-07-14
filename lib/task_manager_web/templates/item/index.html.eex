@@ -43,24 +43,24 @@
       </span>
       <ul class="filters">
         <li>
-          <a href="/items" class='<%= selected(@filter, "all") %>'>
+          <a href="/items" class='<%= selected(@filter, "all") %>' accesskey="a">
             All
           </a>
         </li>
         <li>
-          <a href="/active" class='<%= selected(@filter, "active") %>'>
+          <a href="/active" class='<%= selected(@filter, "active") %>' accesskey="v">
             Active
             [<%= Enum.count(filter(@items, "active")) %>]
           </a>
         </li>
         <li>
-          <a href="/completed" class='<%= selected(@filter, "completed") %>'>
+          <a href="/completed" class='<%= selected(@filter, "completed") %>' accesskey="c">
             Completed
             [<%= Enum.count(filter(@items, "completed")) %>]
           </a>
         </li>
       </ul>
-      <a class="clear-completed" href="/clear">
+      <a class="clear-completed" href="/clear" accesskey="p">
         Clear completed
         [<%= Enum.count(filter(@items, "completed")) %>]
       </a>
