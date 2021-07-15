@@ -10,7 +10,14 @@ defmodule TaskManager.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -44,6 +51,7 @@ defmodule TaskManager.MixProject do
       {:telemetry_poller, "~> 0.5"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
+      {:excoveralls, "~> 0.10", only: :test},
       {:plug_cowboy, "~> 2.5"}
     ]
   end
