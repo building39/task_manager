@@ -1,7 +1,9 @@
 defmodule TaskManagerWeb.ItemView do
   use TaskManagerWeb, :view
 
-  # add class "completed" to a list item if item.status=1
+  @doc """
+  Add class "completed" to a list item if item.status=1.
+  """
   def complete(item) do
     case item.status do
       1 -> "completed"
@@ -9,7 +11,9 @@ defmodule TaskManagerWeb.ItemView do
     end
   end
 
-  # add "checked" to input if item.status=1
+  @doc """
+  Add "checked" to input if item.status=1.
+  """
   def checked(item) do
     case item.status do
       1 -> "checked"
@@ -17,11 +21,16 @@ defmodule TaskManagerWeb.ItemView do
     end
   end
 
-  # returns integer value of items where item.status == 0 (not "done")
+  @doc """
+  Returns integer value of items where item.status == 0 (not "done").
+  """
   def remaining_items(items) do
     Enum.filter(items, fn i -> i.status == 0 end) |> Enum.count
   end
 
+  @doc """
+  Filter items.
+  """
   def filter(items, str) do
     case str do
       "all" ->
@@ -33,6 +42,8 @@ defmodule TaskManagerWeb.ItemView do
     end
   end
 
+  @doc """
+  """
   def selected(filter, str) do
     case filter == str do
       true -> "selected"
@@ -40,15 +51,19 @@ defmodule TaskManagerWeb.ItemView do
     end
   end
         
-  # pluralise the word item when the number of items is greather/less than 1
+  @doc """
+  Pluralise the word item when the number of items is greather/less than 1.
+  """
   def pluralise(items) do
-    # items where status < 1 is equal to Zero or Greater than One:
     case remaining_items(items) == 0 || remaining_items(items) > 1 do
       true -> "items"
       false -> "item"
     end
   end
 
+  @doc """
+  Return true if items count is greater than zero.
+  """
   def got_items?(items) do
     Enum.filter(items, fn i -> i.status < 2 end) |> Enum.count > 0
   end

@@ -7,6 +7,8 @@ defmodule TaskManagerWeb.ItemController do
   alias TaskManager.Todo
   alias TaskManager.Todo.Item
 
+  @doc """
+  """
   def clear_completed(conn, _param) do
     person_id = 0
     query = from(i in Item, where: i.person_id == ^person_id, where: i.status == 1)
@@ -14,6 +16,8 @@ defmodule TaskManagerWeb.ItemController do
     index(conn, %{filter: "all"})
   end
 
+  @doc """
+  """
   def index(conn, params) do
     item =
       if not is_nil(params) and Map.has_key?(params, "id") do
@@ -33,11 +37,15 @@ defmodule TaskManagerWeb.ItemController do
     )
   end
 
+  @doc """
+  """
   def new(conn, _params) do
     changeset = Todo.change_item(%Item{})
     render(conn, "new.html", changeset: changeset)
   end
 
+  @doc """
+  """
   def create(conn, %{"item" => item_params}) do
     case Todo.create_item(item_params) do
       {:ok, item} ->
@@ -50,15 +58,21 @@ defmodule TaskManagerWeb.ItemController do
     end
   end
 
+  @doc """
+  """
   def show(conn, %{"id" => id}) do
     item = Todo.get_item!(id)
     render(conn, "show.html", item: item)
   end
 
+  @doc """
+  """
   def edit(conn, params) do
     index(conn, params)
   end
 
+  @doc """
+  """
   def update(conn, %{"id" => id, "item" => item_params}) do
     item = Todo.get_item!(id)
 
@@ -73,6 +87,8 @@ defmodule TaskManagerWeb.ItemController do
     end
   end
 
+  @doc """
+  """
   def delete(conn, %{"id" => id}) do
     item = Todo.get_item!(id)
     {:ok, _item} = Todo.delete_item(item)
@@ -82,12 +98,16 @@ defmodule TaskManagerWeb.ItemController do
     |> redirect(to: Routes.item_path(conn, :index))
   end
 
+  @doc """
+  """
   def toggle(conn, %{"id" => id}) do
     item = Todo.get_item!(id)
     Todo.update_item(item, %{status: toggle_status(item)})
     redirect(conn, to: Routes.item_path(conn, :index))
   end
 
+  @doc """
+  """
   def toggle_status(item) do
     case item.status do
       0 -> 1
